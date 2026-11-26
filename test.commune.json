@@ -1,0 +1,18 @@
+[
+  {
+    "code": "13001",
+    "nom": "Aix-en-Provence",
+    "centre": {
+      "type": "Point",
+      "coordinates": [5.3879, 43.536]
+    }
+  },
+  {
+    "code": "13012",
+    "nom": "Beaurecueil",
+    "centre": {
+      "type": "Point",
+      "coordinates": [5.5481, 43.5197]
+    }
+  }
+]

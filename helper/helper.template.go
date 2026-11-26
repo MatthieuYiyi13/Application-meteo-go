@@ -16,6 +16,10 @@ func Render(w http.ResponseWriter, status int, name string, data any) {
 	var buf bytes.Buffer
 	if err := templates.ExecuteTemplate(&buf, name, data); err != nil {
 		log.Printf("Erreur template (%s) : %v\n", name, err)
+		if name == "error" {
+			http.Error(w, "Erreur chargement de la page", status)
+			return
+		}
 		RenderError(w, http.StatusInternalServerError, "Erreur chargement de la page")
 		return
 	}

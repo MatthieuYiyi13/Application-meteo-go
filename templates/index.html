@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Météo YIHA</title>
 </head>
 <body>
-    
+    <main>
+        <h1>Météo YIHA</h1>
+        <form action="/" method="get">
+            <label for="codePostal">Code postal</label>
+            <input id="codePostal" name="codePostal" inputmode="numeric"
+                   pattern="[0-9]{5}" maxlength="5" value="{{.CodePostal}}" required>
+            <button type="submit">Rechercher</button>
+        </form>
+
+        {{if .Message}}<p role="status">{{.Message}}</p>{{end}}
+
+        {{if gt (len .Communes) 1}}
+        <form action="/" method="get">
+            <input type="hidden" name="codePostal" value="{{.CodePostal}}">
+            <label for="commune">Commune</label>
+            <select id="commune" name="commune" required>
+                <option value="">Choisir une commune</option>
+                {{range .Communes}}
+                <option value="{{.Code}}" {{if $.Commune}}{{if eq .Code $.Commune.Code}}selected{{end}}{{end}}>{{.Nom}}</option>
+                {{end}}
+            </select>
+            <button type="submit">Afficher la météo</button>
+        </form>
+        {{end}}
+
+        {{if .Previsions}}
+        <h2>{{.Commune.Nom}} — températures du jour</h2>
+        <table>
+            <thead>
+                <tr><th scope="col">Heure locale</th><th scope="col">Température (°C)</th></tr>
+            </thead>
+            <tbody>
+                {{range .Previsions}}
+                <tr><th scope="row">{{.Heure}}</th><td>{{.Temperature}}</td></tr>
+                {{end}}
+            </tbody>
+        </table>
+        {{end}}
+    </main>
 </body>
 </html>
