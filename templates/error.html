@@ -1,0 +1,15 @@
+{{define "error"}}
+<!DOCTYPE html>
+<html lang="fr">
+{{template "head" (printf "Erreur %d" .Code)}}
+<body>
+    <main class="container page">
+        <section class="panel" aria-labelledby="titre-erreur">
+            <h1 id="titre-erreur">Erreur {{.Code}}</h1>
+            <p>{{.Message}}</p>
+            <a class="error-action" href="/">Revenir à l’accueil</a>
+        </section>
+    </main>
+</body>
+</html>
+{{end}}

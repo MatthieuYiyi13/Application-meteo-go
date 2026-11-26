@@ -1,0 +1,147 @@
+:root {
+    color-scheme: light;
+    font-family: system-ui, sans-serif;
+    --ink: #102c51;
+    --accent: #1551a0;
+    --line: #d5e5f8;
+    --sky: #eef6ff;
+    --sun: #ffdb57;
+    --sun-hover: #ffcb32;
+    color: var(--ink);
+    background: var(--sky);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(150deg, #dcecff, #fff 60%, #fff8da);
+    line-height: 1.5;
+}
+
+.container {
+    width: min(100% - 1.5rem, 48rem);
+    margin-inline: auto;
+}
+
+.page {
+    display: grid;
+    gap: 1rem;
+    padding-block: clamp(1.25rem, 6vw, 3.5rem);
+}
+
+.hero, .panel {
+    min-width: 0;
+    padding: clamp(1rem, 4vw, 2rem);
+    border-radius: 1rem;
+    box-shadow: 0 12px 30px #1646831c;
+}
+
+.hero {
+    color: #fff;
+    background: linear-gradient(125deg, #123a77, #155cb4);
+    border-top: 4px solid var(--sun);
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+}
+
+h1, h2 {
+    margin: 0 0 1rem;
+    line-height: 1.15;
+    letter-spacing: -.035em;
+}
+
+h1 { font-size: clamp(1.65rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.2rem, 3.5vw, 1.7rem); }
+
+.back-link {
+    justify-self: start;
+    color: var(--accent);
+    font-weight: 650;
+    text-underline-offset: .2em;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .5rem;
+}
+
+.search-form label {
+    grid-column: 1 / -1;
+    font-weight: 650;
+}
+
+.choix-commune { margin-top: 1rem; }
+
+input, select, button {
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: .55rem .75rem;
+    border: 1px solid #fff;
+    border-radius: .5rem;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+}
+
+button, .error-action {
+    border-color: var(--sun);
+    background: var(--sun);
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+button:hover, .error-action:hover { background: var(--sun-hover); }
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.hero :focus-visible { outline-color: var(--sun); }
+
+.error-action {
+    display: inline-block;
+    padding: .55rem .75rem;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+}
+
+th, td {
+    padding: .6rem .45rem;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+}
+
+thead { background: #fff2b8; }
+tbody tr:nth-child(even) { background: var(--sky); }
+.weather-icon { font-size: 1.25em; }
+.temp-min { color: var(--accent); }
+.temp-max { color: #785000; }
+
+.carte-commune {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid var(--line);
+    border-radius: .5rem;
+}
+
+@media (max-width: 30rem) {
+    .search-form { grid-template-columns: minmax(0, 1fr); }
+    table { font-size: .875rem; }
+    th, td { padding-inline: .25rem; }
+}

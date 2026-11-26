@@ -1,58 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Météo YIHA</title>
-</head>
+{{template "head" "Accueil"}}
 <body>
-    <header>
-        <h1>Météo YIHA</h1>
-    </header>
-
-    <main>
-        <h2>Rechercher la météo d’une commune</h2>
-        <form action="/" method="get">
-            <label for="codePostal">Code postal</label>
-            <input id="codePostal" name="codePostal" inputmode="numeric"
-                   pattern="[0-9]{5}" maxlength="5" placeholder="Ex. 13100"
-                   value="{{.CodePostal}}" required>
-        </form>
-
-        {{if .Message}}<p role="status">{{.Message}}</p>{{end}}
-
-        {{if gt (len .Communes) 1}}
-        <form action="/" method="get">
-            <input type="hidden" name="codePostal" value="{{.CodePostal}}">
-            <label for="commune">Commune</label>
-            <select id="commune" name="commune" required>
-                <option value="">Choisir une commune</option>
-                {{range .Communes}}
-                {{end}}
-            </select>
-        </form>
-        {{end}}
-        {{if .Previsions}}
-        <section>
-            <h2>{{.Commune.Nom}} — températures du jour</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Heure locale</th>
-                        <th scope="col">Température (°C)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{range .Previsions}}
-                    <tr>
-                        <th scope="row">{{.Heure}}</th>
-                        <td>{{.Temperature}}</td>
-                    </tr>
+    <main class="container page">
+        <section class="hero">
+            <h1>La météo de ta commune</h1>
+            {{template "recherche" .Recherche}}
+            {{if .Communes}}
+            <form class="search-form choix-commune" action="/previsions" method="get">
+                <input type="hidden" name="q" value="{{.Recherche}}">
+                <label for="commune">Choisir une commune parmi les résultats</label>
+                <select id="commune" name="commune" required>
+                    <option value="">Sélectionner une commune</option>
+                    {{range .Communes}}
+                    <option value="{{.Code}}">{{.Nom}}{{if .Departement}} ({{.Departement}}){{end}}</option>
                     {{end}}
-                </tbody>
-            </table>
+                </select>
+                <button type="submit">Voir la météo</button>
+            </form>
+            {{end}}
         </section>
-        {{end}}
     </main>
 </body>
 </html>

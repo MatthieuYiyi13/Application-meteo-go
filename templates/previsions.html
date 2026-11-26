@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+{{template "head" "Prévisions"}}
+<body>
+    <main class="container page">
+        <a class="back-link" href="/">Retour à l’accueil</a>
+        <section class="panel" aria-labelledby="titre-previsions">
+            <h1 id="titre-previsions">{{.Commune.Nom}} — 7 jours</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Météo</th>
+                        <th scope="col">Min.</th>
+                        <th scope="col">Max.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Previsions}}
+                    <tr>
+                        <th scope="row">{{.Date}}</th>
+                        <td><span class="weather-icon" aria-hidden="true">{{.Icone}}</span> {{.Condition}}</td>
+                        <td class="temp-min">{{.Min}}</td>
+                        <td class="temp-max">{{.Max}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+            <iframe class="carte-commune"
+                    src="{{.CarteURL}}"
+                    title="Carte de {{.Commune.Nom}}"
+                    height="360"
+                    loading="lazy"></iframe>
+        </section>
+    </main>
+</body>
+</html>
