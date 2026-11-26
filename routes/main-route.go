@@ -44,8 +44,8 @@ func chargerMeteo(r *http.Request, codeCommune string, page *accueil) int {
 	}
 	page.Communes = communes
 	if len(communes) == 0 {
-		page.Message = "Aucune commune trouvée pour ce code postal."
-		return http.StatusOK
+		page.Message = "Erreur 404 — Aucune commune trouvée pour ce code postal."
+		return http.StatusNotFound
 	}
 
 	if codeCommune == "" {
@@ -61,8 +61,8 @@ func chargerMeteo(r *http.Request, codeCommune string, page *accueil) int {
 		}
 	}
 	if page.Commune == nil {
-		page.Message = "Choisis une commune dans la liste."
-		return http.StatusBadRequest
+		page.Message = "Erreur 404 — not found."
+		return http.StatusNotFound
 	}
 
 	coord := page.Commune.Centre.Coordinates

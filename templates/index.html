@@ -6,13 +6,17 @@
     <title>Météo YIHA</title>
 </head>
 <body>
-    <main>
+    <header>
         <h1>Météo YIHA</h1>
+    </header>
+
+    <main>
+        <h2>Rechercher la météo d’une commune</h2>
         <form action="/" method="get">
             <label for="codePostal">Code postal</label>
             <input id="codePostal" name="codePostal" inputmode="numeric"
-                   pattern="[0-9]{5}" maxlength="5" value="{{.CodePostal}}" required>
-            <button type="submit">Rechercher</button>
+                   pattern="[0-9]{5}" maxlength="5" placeholder="Ex. 13100"
+                   value="{{.CodePostal}}" required>
         </form>
 
         {{if .Message}}<p role="status">{{.Message}}</p>{{end}}
@@ -24,25 +28,30 @@
             <select id="commune" name="commune" required>
                 <option value="">Choisir une commune</option>
                 {{range .Communes}}
-                <option value="{{.Code}}" {{if $.Commune}}{{if eq .Code $.Commune.Code}}selected{{end}}{{end}}>{{.Nom}}</option>
                 {{end}}
             </select>
-            <button type="submit">Afficher la météo</button>
         </form>
         {{end}}
-
         {{if .Previsions}}
-        <h2>{{.Commune.Nom}} — températures du jour</h2>
-        <table>
-            <thead>
-                <tr><th scope="col">Heure locale</th><th scope="col">Température (°C)</th></tr>
-            </thead>
-            <tbody>
-                {{range .Previsions}}
-                <tr><th scope="row">{{.Heure}}</th><td>{{.Temperature}}</td></tr>
-                {{end}}
-            </tbody>
-        </table>
+        <section>
+            <h2>{{.Commune.Nom}} — températures du jour</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Heure locale</th>
+                        <th scope="col">Température (°C)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Previsions}}
+                    <tr>
+                        <th scope="row">{{.Heure}}</th>
+                        <td>{{.Temperature}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </section>
         {{end}}
     </main>
 </body>
