@@ -5,7 +5,12 @@
     <main class="container page">
         <section class="hero">
             <h1>La météo de ta commune</h1>
-            {{template "recherche" .Recherche}}
+            <form class="search-form" role="search" action="/" method="get">
+                <label for="recherche">Nom de commune ou code postal</label>
+                <input id="recherche" name="q" type="search" maxlength="100"
+                       value="{{.Recherche}}" required>
+                <button type="submit">Rechercher</button>
+            </form>
             {{if .Communes}}
             <form class="search-form choix-commune" action="/previsions" method="get">
                 <input type="hidden" name="q" value="{{.Recherche}}">
@@ -23,3 +28,12 @@
     </main>
 </body>
 </html>
+
+{{define "head"}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.}} · Météo YIHA</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+{{end}}
